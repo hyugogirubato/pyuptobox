@@ -74,7 +74,7 @@ if __name__ == "__main__":
     # login
     data = client.login(token="USER_TOKEN")
 
-    # get cached keys
+    # file code
     file_code = "5w4rff6r17oz"
     
     # get file info
