@@ -12,83 +12,75 @@
         <img src="https://deepsource.io/gh/hyugogirubato/UptoboxSDK.svg/?label=active+issues" alt="DeepSource">
     </a>
 </p>
+UptoboxSDK is a powerful, user-friendly Python package designed for seamless interaction with Uptobox API. It allows users to perform various operations such as multiple connection methods, unrestricted direct use, easy implementation with other programs, and a simple plug-and-play installation. UptoboxSDK is forever free and open-source software.
 
 ## Features
 
-- 🛡️ Methode de connexion multiple
-- 📦 Direct use of the service, without restrictions
-- 🛠️ Easy implementation in other programs
-- 🧩 Plug-and-play installation via setup.py
-- ❤️ Forever FOSS!
+* 🛡️ Multiple connection methods support
+* 📦 Unrestricted direct use of the service
+* 🛠️ Simple integration with other applications
+* 🧩 Easy plug-and-play installation via setup.py
+* ❤️ Always free and open-source software (FOSS)
 
-## Installation
+## Installation 
 
-*Note: Requires [Python] 3.7.0 or newer with PIP installed.*
+**Note**: UptoboxSDK requires [Python](https://python.org/) 3.7.0 or newer with PIP installed.
 
-```shell
+### With setup.py
+
+```sh
 $ python setup.py install
 ```
-
-You now have the `UptoboxSDK` package installed and a `UptoboxSDK` executable is now available.
-
+You now have the `UptoboxSDK` package installed, and a `UptoboxSDK` executable is available.
 
 ### From Source Code
-
-The following steps are instructions on download, preparing, and running the code under a Venv environment.
-You can skip steps 3-5 with a simple `pip install .` call instead, but you miss out on a wide array of benefits.
-
-1. `git clone https://github.com/hyugogirubato/UptoboxSDK`
-2. `cd pydvdfab`
-3. `python -m venv env`  
-4. `source env/bin/activate`   
-5. `python setup.py install`
-
+The following steps provide instructions on downloading, preparing, and running the code under a Venv environment. You can skip steps 3-5 with a simple `pip install .` call instead, but you will miss out on a wide array of benefits.
+```sh
+$ git clone https://github.com/hyugogirubato/UptoboxSDK
+$ cd UptoboxSDK
+$ python -m venv env
+$ source env/bin/activate
+$ python setup.py install
+```
 As seen in Step 5, running the `UptoboxSDK` executable is somewhat different to a normal PIP installation.
-See [Venv's Docs] on various ways of making calls under the virtual-environment.
+See [Venv's Docs](https://docs.python.org/3/tutorial/venv.html) on various ways of making calls under the virtual-environment.
 
-  [Python]: <https://python.org>
-  [Venv's]: <https://docs.python.org/3/tutorial/venv.html>
-  [Venv's Docs]: <https://docs.python.org/3/library/venv.html>
 
-## Usage
+### Usage
+The following is a minimal example of using UptoboxSDK in a script. It retrieves the download link of a file. There are various other functionalities not shown in this specific example, such as:
 
-The following is a minimal example of using UptoboxSDK in a script. It gets the download link of a
-file. There's various stuff not shown in this specific example like:
+* Searching for a file
+* Uploading a file
+* User information retrieval
+* and much more!
 
-- Searching for a file
-- Uploading a file
-- User information
-- and much more!
-
-Just take a look around the Client code to see what stuff does. Everything is documented quite well.
-There's also various functions in `utils.py` that showcases a lot of features.
-
+Explore the Client code to discover additional features. Everything is well-documented. Also, check out the various functions in [utils.py](UptoboxSDK/utils.py) that showcase many other capabilities.
 ```py
 from UptoboxSDK.client import Client
 
 # Demo: https://uptobox.com/5w4rff6r17oz
 if __name__ == "__main__":
-    # create client
+    # Create client
     client = Client()
 
-    # login
+    # Login
     data = client.login(token="USER_TOKEN")
 
-    # file code
+    # File code
     file_code = "5w4rff6r17oz"
     
-    # get file info
+    # Get file info
     info = client.get_file_info(code=file_code)
     
-    # get file download link
+    # Get file download link
     link = client.get_link(code=file_code)
     
     print("I: Subscription: {}".format("PREMIUM" if data["premium"] == 1 else "FREE"))
     print("I: Name: {}".format(info["file_name"]))
     print("I: Size: {}".format(info["file_size"]))
     print("I: Link: {}".format(link))
-```
 
+```
 ## Credit
 
 - Uptobox Icon &copy; Uptobox.
