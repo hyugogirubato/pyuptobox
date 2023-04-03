@@ -15,7 +15,7 @@
 
 ## Features
 
-- 🛡️ Methode de connexion multiple
+- 🛡️ Multiple connection method
 - 📦 Direct use of the service, without restrictions
 - 🛠️ Easy implementation in other programs
 - 🧩 Plug-and-play installation via setup.py
