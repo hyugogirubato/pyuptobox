@@ -1,86 +1,93 @@
 <p align="center">
-    <img src="docs/images/uptobox_icon_24.png"> <a href="https://github.com/hyugogirubato/UptoboxSDK">UptoboxSDK</a>
+    <img src="docs/images/uptobox_icon_24.png"> <a href="https://github.com/hyugogirubato/pyuptobox">pyuptobox</a>
     <br/>
     <sup><em>Python SDK to interact with Uptobox API.</em></sup>
 </p>
 
 <p align="center">
-    <a href="https://pypi.org/project/UptoboxSDK">
+    <a href="https://pypi.org/project/pyuptobox">
         <img src="https://img.shields.io/badge/python-3.7%2B-informational" alt="Python version">
     </a>
-    <a href="https://deepsource.io/gh/hyugogirubato/UptoboxSDK">
-        <img src="https://deepsource.io/gh/hyugogirubato/UptoboxSDK.svg/?label=active+issues" alt="DeepSource">
+    <a href="https://deepsource.io/gh/hyugogirubato/pyuptobox">
+        <img src="https://deepsource.io/gh/hyugogirubato/pyuptobox.svg/?label=active+issues" alt="DeepSource">
     </a>
 </p>
-UptoboxSDK is a powerful, user-friendly Python package designed for seamless interaction with Uptobox API. It allows users to perform various operations such as multiple connection methods, unrestricted direct use, easy implementation with other programs, and a simple plug-and-play installation. UptoboxSDK is forever free and open-source software.
 
 ## Features
 
-* 🛡️ Multiple connection methods support
-* 📦 Unrestricted direct use of the service
-* 🛠️ Simple integration with other applications
-* 🧩 Easy plug-and-play installation via setup.py
-* ❤️ Always free and open-source software (FOSS)
+- 🛡️ Methode de connexion multiple
+- 📦 Direct use of the service, without restrictions
+- 🛠️ Easy implementation in other programs
+- 🧩 Plug-and-play installation via setup.py
+- ❤️ Forever FOSS!
 
-## Installation 
+## Installation
 
-**Note**: UptoboxSDK requires [Python](https://python.org/) 3.7.0 or newer with PIP installed.
+*Note: Requires [Python] 3.7.0 or newer with PIP installed.*
 
-### With setup.py
-
-```sh
+```shell
 $ python setup.py install
 ```
-You now have the `UptoboxSDK` package installed, and a `UptoboxSDK` executable is available.
+
+You now have the `pyuptobox` package installed and a `pyuptobox` executable is now available.
+
 
 ### From Source Code
-The following steps provide instructions on downloading, preparing, and running the code under a Venv environment. You can skip steps 3-5 with a simple `pip install .` call instead, but you will miss out on a wide array of benefits.
-```sh
-$ git clone https://github.com/hyugogirubato/UptoboxSDK
-$ cd UptoboxSDK
-$ python -m venv env
-$ source env/bin/activate
-$ python setup.py install
-```
-As seen in Step 5, running the `UptoboxSDK` executable is somewhat different to a normal PIP installation.
-See [Venv's Docs](https://docs.python.org/3/tutorial/venv.html) on various ways of making calls under the virtual-environment.
 
+The following steps are instructions on download, preparing, and running the code under a Venv environment.
+You can skip steps 3-5 with a simple `pip install .` call instead, but you miss out on a wide array of benefits.
 
-### Usage
-The following is a minimal example of using UptoboxSDK in a script. It retrieves the download link of a file. There are various other functionalities not shown in this specific example, such as:
+1. `git clone https://github.com/hyugogirubato/pyuptobox`
+2. `cd pyuptobox`
+3. `python -m venv env`  
+4. `source env/bin/activate`   
+5. `python setup.py install`
 
-* Searching for a file
-* Uploading a file
-* User information retrieval
-* and much more!
+As seen in Step 5, running the `pyuptobox` executable is somewhat different to a normal PIP installation.
+See [Venv's Docs] on various ways of making calls under the virtual-environment.
 
-Explore the Client code to discover additional features. Everything is well-documented. Also, check out the various functions in [utils.py](UptoboxSDK/utils.py) that showcase many other capabilities.
+  [Python]: <https://python.org>
+  [Venv's]: <https://docs.python.org/3/tutorial/venv.html>
+  [Venv's Docs]: <https://docs.python.org/3/library/venv.html>
+
+## Usage
+
+The following is a minimal example of using pyuptobox in a script. It gets the download link of a
+file. There's various stuff not shown in this specific example like:
+
+- Searching for a file
+- Uploading a file
+- User information
+- and much more!
+
+Just take a look around the Client code to see what stuff does. Everything is documented quite well.
+There's also various functions in `utils.py` that showcases a lot of features.
+
 ```py
-from UptoboxSDK.client import Client
+from pyuptobox.client import Client
+from pyuptobox import utils
 
 # Demo: https://uptobox.com/5w4rff6r17oz
 if __name__ == "__main__":
-    # Create client
+    # create client
     client = Client()
+    file_code = utils.get_code(value="https://uptobox.com/5w4rff6r17oz")
 
-    # Login
+    # login
     data = client.login(token="USER_TOKEN")
-
-    # File code
-    file_code = "5w4rff6r17oz"
     
-    # Get file info
-    info = client.get_file_info(code=file_code)
+    # get file info
+    info = client.get_file_info(file_codes=file_code)
     
-    # Get file download link
-    link = client.get_link(code=file_code)
+    # get file download link
+    link = client.get_file_link(file_code=file_code)
     
     print("I: Subscription: {}".format("PREMIUM" if data["premium"] == 1 else "FREE"))
     print("I: Name: {}".format(info["file_name"]))
     print("I: Size: {}".format(info["file_size"]))
     print("I: Link: {}".format(link))
-
 ```
+
 ## Credit
 
 - Uptobox Icon &copy; Uptobox.

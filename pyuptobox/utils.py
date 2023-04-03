@@ -2,7 +2,7 @@ import math
 import re
 import time
 
-from UptoboxSDK.exceptions import InvalidFileCode
+from pyuptobox.exceptions import InvalidFileCode
 
 
 def get_size(bytes_size: int) -> str:
@@ -15,12 +15,12 @@ def get_size(bytes_size: int) -> str:
     return f"{s} {name[i]}"
 
 
-def get_code(code: str) -> str:
-    if code.startswith("https://uptobox.com/") or code.startswith("https://uptostream.com/"):
-        code = re.search(r"\.com/(\w+)", code).group(1)
-    if code is None or len(code) != 12:
+def get_code(value: str) -> str:
+    if value.startswith("https://"):
+        value = re.search(r"\.com/(\w+)", value).group(1)
+    if value is None or len(value) != 12:
         raise InvalidFileCode("The file code format is invalid")
-    return code
+    return value
 
 
 def get_input_bool(message: str, default=True) -> bool:

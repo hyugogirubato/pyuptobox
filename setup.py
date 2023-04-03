@@ -6,16 +6,16 @@ with open("README.md", mode="r", encoding="utf-8") as f:
     LONG_DESCRIPTION = f.read()
 
 setup(
-    name="UptoboxSDK",
+    name="pyuptobox",
     version="1.0.0",
     description="Python SDK to interact with Uptobox API.",
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
-    url="https://github.com/hyugogirubato/UptoboxSDK",
+    url="https://github.com/hyugogirubato/pyuptobox",
     author="hyugogirubato",
     author_email="hyugogirubato@gmail.com",
     license="GNU GPLv3",
-    packages=["UptoboxSDK"],
+    packages=["pyuptobox"],
     install_requires=["requests", "requests_toolbelt", "beautifulsoup4"],
     classifiers=[
         "Environment :: Console",
