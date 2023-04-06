@@ -1,17 +1,21 @@
 <p align="center">
-    <img src="docs/images/uptobox_icon_24.png"> <a href="https://github.com/hyugogirubato/pyuptobox">pyuptobox</a>
+    <img src="docs/images/binance_icon_24.svg"> <a href="https://github.com/hyugogirubato/pybinance">pyuptobox</a>
     <br/>
-    <sup><em>Python SDK to interact with Uptobox API.</em></sup>
+    <sup><em>Python SDK to interact with Binance API.</em></sup>
 </p>
 
 <p align="center">
-    <a href="https://pypi.org/project/pyuptobox">
+    <a href="https://pypi.org/project/pybinance">
         <img src="https://img.shields.io/badge/python-3.7%2B-informational" alt="Python version">
     </a>
-    <a href="https://deepsource.io/gh/hyugogirubato/pyuptobox">
-        <img src="https://deepsource.io/gh/hyugogirubato/pyuptobox.svg/?label=active+issues" alt="DeepSource">
+    <a href="https://github.com/hyugogirubato/pybinance/releases">
+        <img src="https://img.shields.io/github/release-date/hyugogirubato/pycbzhelper?style=plastic" alt="Release">
     </a>
 </p>
+
+> **Warning**
+> 
+> The client is currently in development, many changes are to be expected. If you have any suggestions for improvement, don't hesitate.
 
 ## Features
 
@@ -29,7 +33,7 @@
 $ python setup.py install
 ```
 
-You now have the `pyuptobox` package installed and a `pyuptobox` executable is now available.
+You now have the `pybinance` package installed and a `pybinance` executable is now available.
 
 
 ### From Source Code
@@ -37,13 +41,13 @@ You now have the `pyuptobox` package installed and a `pyuptobox` executable is n
 The following steps are instructions on download, preparing, and running the code under a Venv environment.
 You can skip steps 3-5 with a simple `pip install .` call instead, but you miss out on a wide array of benefits.
 
-1. `git clone https://github.com/hyugogirubato/pyuptobox`
-2. `cd pyuptobox`
+1. `git clone https://github.com/hyugogirubato/pybinance`
+2. `cd pybinance`
 3. `python -m venv env`  
 4. `source env/bin/activate`   
 5. `python setup.py install`
 
-As seen in Step 5, running the `pyuptobox` executable is somewhat different to a normal PIP installation.
+As seen in Step 5, running the `pybinance` executable is somewhat different to a normal PIP installation.
 See [Venv's Docs] on various ways of making calls under the virtual-environment.
 
   [Python]: <https://python.org>
@@ -52,46 +56,27 @@ See [Venv's Docs] on various ways of making calls under the virtual-environment.
 
 ## Usage
 
-The following is a minimal example of using pyuptobox in a script. It gets the download link of a
-file. There's various stuff not shown in this specific example like:
+The following is a minimal example of using pybinance in a script. He obtains the access token
+of a registered device There's various stuff not shown in this specific example like:
 
-- Searching for a file
-- Uploading a file
-- User information
+- ...
 - and much more!
 
 Just take a look around the Client code to see what stuff does. Everything is documented quite well.
 There's also various functions in `utils.py` that showcases a lot of features.
 
 ```py
-from pyuptobox.client import Client
-from pyuptobox import utils
+from pybinance import Client
 
-# Demo: https://uptobox.com/5w4rff6r17oz
 if __name__ == "__main__":
-    # create client
     client = Client()
-    file_code = utils.get_code(value="https://uptobox.com/5w4rff6r17oz")
-
-    # login
-    data = client.login(token="USER_TOKEN")
-    
-    # get file info
-    info = client.get_file_info(file_codes=file_code)
-    
-    # get file download link
-    link = client.get_file_link(file_code=file_code)
-    
-    print("I: Subscription: {}".format("PREMIUM" if data["premium"] == 1 else "FREE"))
-    print("I: Name: {}".format(info["file_name"]))
-    print("I: Size: {}".format(info["file_size"]))
-    print("I: Link: {}".format(link))
+    client.immed_register(device_id="4a48e4adc872f0755da18b8d1294a878")
 ```
 
 ## Credit
 
-- Uptobox Icon &copy; Uptobox.
-- The great community for their shared research and knowledge about Uptobox and its API.
+- Binance Icon &copy; Binance.
+- The great community for their shared research and knowledge about Binance and its API.
 
 ## License
 
