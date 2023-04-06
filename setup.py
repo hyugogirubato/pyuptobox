@@ -6,17 +6,17 @@ with open("README.md", mode="r", encoding="utf-8") as f:
     LONG_DESCRIPTION = f.read()
 
 setup(
-    name="pybinance",
+    name="pyuptobox",
     version="1.0.2",
-    description="Python SDK to interact with Binance API.",
+    description="Python SDK to interact with Uptobox API.",
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
-    url="https://github.com/hyugogirubato/pybinance",
+    url="https://github.com/hyugogirubato/pyuptobox",
     author="hyugogirubato",
     author_email="hyugogirubato@gmail.com",
     license="GNU GPLv3",
-    packages=["pybinance"],
-    install_requires=["requests", "PyJWT"],
+    packages=["pyuptobox"],
+    install_requires=["requests", "requests_toolbelt", "beautifulsoup4"],
     classifiers=[
         "Environment :: Console",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
