@@ -24,15 +24,18 @@ class Client:
 
     def _request(self, **kwargs) -> dict:
         params = kwargs.get("params", {})
-        if self._token is not None:
+        if self._token:
             params["token"] = self._token
 
+        headers = Client.HEADERS.copy()
+        headers.update(kwargs.get("headers", {}))
+
         r = self._session.request(
-            method=kwargs.get("method", "GET").upper(),
+            method=kwargs.get("method", "GET"),
             url=kwargs.get("url", self._api),
             params=params,
-            data=kwargs.get("data", None),
-            headers=kwargs.get("headers", Client.HEADERS))
+            data=kwargs.get("data"),
+            headers=headers)
 
         content = r.json()
         if content.get("statusCode", 0) in [0, 18, 22, 24, 39]:
@@ -40,11 +43,11 @@ class Client:
         raise Exception(r.text)
 
     def login(self, **kwargs) -> dict:
-        login = kwargs.get("login", None)
-        password = kwargs.get("password", None)
-        token = kwargs.get("token", None)
-        xfss = kwargs.get("xfss", None)
-        if login is not None and password is not None:
+        login = kwargs.get("login")
+        password = kwargs.get("password")
+        token = kwargs.get("token")
+        xfss = kwargs.get("xfss")
+        if login and password:
             r = self._session.request(
                 method="POST",
                 url=f"{self._web}/login",
@@ -52,14 +55,14 @@ class Client:
             )
             if "My account" not in r.text:
                 raise InvalidCredentials("Invalid password/login")
-        elif token is not None:
+        elif token:
             self._token = token
-        elif xfss is not None:
+        elif xfss:
             self._session.cookies.set("xfss", xfss)
         else:
             raise InvalidCredentials("Invalid login credentials")
 
-        if token is None:
+        if not token:
             r = self._session.request(method="GET", url=f"{self._web}/my_account")
             soup = BeautifulSoup(r.content, "html.parser")
             content_wrapper_div = soup.find("div", {"id": "content-wrapper"})
@@ -100,9 +103,9 @@ class Client:
 
     def get_file_link(self, file_code: str, waiting_token: str = None) -> dict:
         params = {"file_code": file_code}
-        if waiting_token is not None:
+        if waiting_token:
             params["waitingToken"] = waiting_token
-        return self._request(url=f"{self._api}/link")["data"]
+        return self._request(url=f"{self._api}/link", params=params)["data"]
 
     def get_file_info(self, file_codes: list) -> list:
         return self._request(url=f"{self._api}/link/info", params={"fileCodes": ",".join(file_codes)})["data"]["list"]
@@ -131,13 +134,13 @@ class Client:
 
     def set_file_info(self, file_code: str, public: bool = None, name: str = None, description: str = None, password: str = None) -> bool:
         params = {"file_code": file_code}
-        if public is not None:
+        if public:
             params["public"] = int(public)
-        if name is not None:
+        if name:
             params["new_name"] = name
-        if description is not None:
+        if description:
             params["description"] = description
-        if password is not None:
+        if password:
             params["password"] = password
         return self._request(method="PATCH", url=f"{self._api}/user/files", params=params)["data"]["updated"] == 1
 
@@ -182,13 +185,11 @@ class Client:
 
     def upload(self, path: Path) -> dict:
         multi = MultipartEncoder(fields={"files": (path.name, open(path, "rb"))})
-        headers = Client.HEADERS.copy()
-        headers["content-type"] = multi.content_type
         return self._request(
             method="POST",
             url="https:" + self._request(url=f"{self._api}/upload")["data"]["uploadLink"],
             data=multi,
-            headers=headers
+            headers={"content-type": multi.content_type}
         )["files"]
 
     def get_pin(self, file_code: str) -> dict:

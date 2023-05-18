@@ -18,7 +18,7 @@ def get_size(bytes_size: int) -> str:
 def get_code(value: str) -> str:
     if value.startswith("https://"):
         value = re.search(r"\.com/(\w+)", value).group(1)
-    if value is None or len(value) != 12:
+    if not value or len(value) != 12:
         raise InvalidFileCode("The file code format is invalid")
     return value
 

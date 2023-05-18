@@ -77,7 +77,7 @@ if __name__ == "__main__":
     data = client.login(token="USER_TOKEN")
     
     # get file info
-    info = client.get_file_info(file_codes=file_code)
+    info = client.get_file_info(file_codes=[file_code])
     
     # get file download link
     link = client.get_file_link(file_code=file_code)
