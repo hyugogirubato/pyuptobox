@@ -18,7 +18,7 @@ class Client:
 
     def __init__(self):
         self._token = None
-        self._web = "https://uptobox.com"
+        self._web = "https://uptobox.eu"
         self._api = f"{self._web}/api"
         self._session = requests.Session()
 
@@ -209,7 +209,7 @@ class Client:
 
     def get_stream(self, file_code: str) -> list:
         KEYS = ["base", "id", "name"]
-        lines = self._request(url=f"https://uptostream.com/api/streaming/source/get", params={
+        lines = self._request(url=f"https://uptostream.eu/api/streaming/source/get", params={
             "file_code": file_code
         })["data"]["sources"].split("\n")
 

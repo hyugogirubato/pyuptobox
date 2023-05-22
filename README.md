@@ -67,11 +67,11 @@ There's also various functions in `utils.py` that showcases a lot of features.
 from pyuptobox.client import Client
 from pyuptobox import utils
 
-# Demo: https://uptobox.com/5w4rff6r17oz
+# Demo: https://uptobox.eu/5w4rff6r17oz
 if __name__ == "__main__":
     # create client
     client = Client()
-    file_code = utils.get_code(value="https://uptobox.com/5w4rff6r17oz")
+    file_code = utils.get_code(value="https://uptobox.eu/5w4rff6r17oz")
 
     # login
     data = client.login(token="USER_TOKEN")

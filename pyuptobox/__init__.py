@@ -1,4 +1,4 @@
 from .client import Client
 from .utils import *
 
-__version__ = "1.0.3"
+__version__ = "1.0.4"

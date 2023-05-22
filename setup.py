@@ -7,7 +7,7 @@ with open("README.md", mode="r", encoding="utf-8") as f:
 
 setup(
     name="pyuptobox",
-    version="1.0.3",
+    version="1.0.4",
     description="Python SDK to interact with Uptobox API.",
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",

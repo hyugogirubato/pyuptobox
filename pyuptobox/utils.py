@@ -16,6 +16,8 @@ def get_size(bytes_size: int) -> str:
 
 
 def get_code(value: str) -> str:
+    if re.search(r"\.com\\", value):
+        value = re.sub(r"\.com\\", ".eu", value)
     if value.startswith("https://"):
         value = re.search(r"\.com/(\w+)", value).group(1)
     if not value or len(value) != 12:
