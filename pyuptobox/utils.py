@@ -2,6 +2,8 @@ import math
 import re
 import time
 
+import requests
+
 from pyuptobox.exceptions import InvalidFileCode
 
 
@@ -16,20 +18,12 @@ def get_size(bytes_size: int) -> str:
 
 
 def get_code(value: str) -> str:
-    if re.search(r"\.com\\", value):
-        value = re.sub(r"\.com\\", ".eu", value)
-    if value.startswith("https://"):
-        value = re.search(r"\.com/(\w+)", value).group(1)
-    if not value or len(value) != 12:
-        raise InvalidFileCode("The file code format is invalid")
-    return value
-
-
-def get_input_bool(message: str, default=True) -> bool:
-    answer = str(input(f"{message} [{default}]: ")).lower()
-    if answer == "":
-        return default
-    return answer in ["y", "yes", "t", "true", "1"]
+    match = re.search(r'https://uptobox\.(?:eu|com)/(\w+)', value)
+    if match:
+        return match.group(1)
+    elif re.match(r"^[a-z0-9]{12}$", value):
+        return value
+    raise InvalidFileCode(f"Unable to find an identifier: {value}")
 
 
 def countdown(wait_time: int) -> None:
@@ -39,3 +33,11 @@ def countdown(wait_time: int) -> None:
         print(timer, end="\r")
         time.sleep(1)
         wait_time -= 1
+
+
+def get_domain(host: str) -> bool:
+    try:
+        r = requests.request(method="GET", url=host, timeout=3)
+        return True
+    except:
+        return False

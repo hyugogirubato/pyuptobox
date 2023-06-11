@@ -2,8 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres
+to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [1.1.0] - 2023-06-11
+
+### Added
+
+- Detection of the domain available according to the operator.
+- Added `test.py` for usage example.
+- New icon.
+
+### Fixed
+
+- File code analysis.
+
+### Changed
+
+- Renamed functions.
+- Updated `README`.
+- Variables now public.
+- Header simplification.
 
 ## [1.0.4] - 2023-05-22
 
@@ -48,8 +67,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.0] - 2023-04-02
 
+### Added
+
 Initial Release.
 
+[1.1.0]: https://github.com/hyugogirubato/pyuptobox/releases/tag/v1.1.0
 [1.0.4]: https://github.com/hyugogirubato/pyuptobox/releases/tag/v1.0.4
 [1.0.3]: https://github.com/hyugogirubato/pyuptobox/releases/tag/v1.0.3
 [1.0.2]: https://github.com/hyugogirubato/pyuptobox/releases/tag/v1.0.2

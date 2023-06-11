@@ -1,98 +1,75 @@
-<p align="center">
-    <img src="docs/images/uptobox_icon_24.png"> <a href="https://github.com/hyugogirubato/pyuptobox">pyuptobox</a>
-    <br/>
-    <sup><em>Python SDK to interact with Uptobox API.</em></sup>
-</p>
+<div align="center">
 
-<p align="center">
-    <a href="https://pypi.org/project/pyuptobox">
-        <img src="https://img.shields.io/badge/python-3.7%2B-informational" alt="Python version">
-    </a>
-    <a href="https://deepsource.io/gh/hyugogirubato/pyuptobox">
-        <img src="https://deepsource.io/gh/hyugogirubato/pyuptobox.svg/?label=active+issues" alt="DeepSource">
-    </a>
-</p>
+<img src="https://github.com/hyugogirubato/pyuptobox/blob/main/docs/images/icon.png" width="10%">
+
+# PyUptobox
+
+[![License](https://img.shields.io/github/license/hyugogirubato/pyuptobox)](https://github.com/hyugogirubato/pyuptobox/blob/main/LICENSE)
+[![Release](https://img.shields.io/github/release-date/hyugogirubato/pyuptobox)](https://github.com/hyugogirubato/pyuptobox/releases)
+[![Latest Version](https://img.shields.io/pypi/v/pyuptobox)](https://pypi.org/project/pyuptobox/)
+
+</div>
+
+PyUptobox is a Python client for the Uptobox API. It provides convenient methods for authentication, file management,
+and file download/upload operations with Uptobox, a popular file hosting service.
 
 ## Features
 
-- 🛡️ Methode de connexion multiple
-- 📦 Direct use of the service, without restrictions
-- 🛠️ Easy implementation in other programs
-- 🧩 Plug-and-play installation via setup.py
-- ❤️ Forever FOSS!
+- Authenticate with Uptobox using login credentials or token
+- Get user account information
+- Set various user settings (SSL download, direct download, etc.)
+- Manage files and folders (create, delete, move, rename)
+- Retrieve file information and download links
+- Upload files to Uptobox
+- Get streaming links and transcode files
+- and more...
 
 ## Installation
 
-*Note: Requires [Python] 3.7.0 or newer with PIP installed.*
+You can install PyUptobox using pip:
 
-```shell
-$ python setup.py install
-```
-
-You now have the `pyuptobox` package installed and a `pyuptobox` executable is now available.
-
-
-### From Source Code
-
-The following steps are instructions on download, preparing, and running the code under a Venv environment.
-You can skip steps 3-5 with a simple `pip install .` call instead, but you miss out on a wide array of benefits.
-
-1. `git clone https://github.com/hyugogirubato/pyuptobox`
-2. `cd pyuptobox`
-3. `python -m venv env`  
-4. `source env/bin/activate`   
-5. `python setup.py install`
-
-As seen in Step 5, running the `pyuptobox` executable is somewhat different to a normal PIP installation.
-See [Venv's Docs] on various ways of making calls under the virtual-environment.
-
-  [Python]: <https://python.org>
-  [Venv's]: <https://docs.python.org/3/tutorial/venv.html>
-  [Venv's Docs]: <https://docs.python.org/3/library/venv.html>
+````shell
+pip install pyuptobox
+````
 
 ## Usage
 
-The following is a minimal example of using pyuptobox in a script. It gets the download link of a
-file. There's various stuff not shown in this specific example like:
+Here's an example of how to use the PyUptobox library:
 
-- Searching for a file
-- Uploading a file
-- User information
-- and much more!
-
-Just take a look around the Client code to see what stuff does. Everything is documented quite well.
-There's also various functions in `utils.py` that showcases a lot of features.
-
-```py
+```python
 from pyuptobox.client import Client
-from pyuptobox import utils
+from pyuptobox.utils import get_code, get_size
 
-# Demo: https://uptobox.eu/5w4rff6r17oz
-if __name__ == "__main__":
-    # create client
-    client = Client()
-    file_code = utils.get_code(value="https://uptobox.eu/5w4rff6r17oz")
+# Create client
+client = Client()
 
-    # login
-    data = client.login(token="USER_TOKEN")
-    
-    # get file info
-    info = client.get_file_info(file_codes=[file_code])
-    
-    # get file download link
-    link = client.get_file_link(file_code=file_code)
-    
-    print("I: Subscription: {}".format("PREMIUM" if data["premium"] == 1 else "FREE"))
-    print("I: Name: {}".format(info["file_name"]))
-    print("I: Size: {}".format(info["file_size"]))
-    print("I: Link: {}".format(link))
+# Login
+client.login(token="YOUR_USER_TOKEN")
+
+# Get file code
+file_code = get_code(value="https://uptobox.com/your-file-url")
+
+# Get file info
+info = client.get_files_info(file_codes=[file_code])[0]
+file_size = get_size(info["file_size"])
+
+# Get file download link
+link = client.get_file_link(file_code=file_code)["dlLink"]
+
+print("File Name: {}".format(info["file_name"]))
+print("File Size: {}".format(file_size))
+print("Download Link: {}".format(link))
+
 ```
 
-## Credit
+For more information on how to use PyUptobox, please refer to the [documentation](https://docs.uptobox.com).
 
-- Uptobox Icon &copy; Uptobox.
-- The great community for their shared research and knowledge about Uptobox and its API.
+## Disclaimer
 
-## License
+PyUptobox is an unofficial library and is not affiliated with or endorsed by Uptobox or Uptostream. The library is
+provided "as is" without any warranty, and the usage of this library is at your own risk. Make sure to comply with the
+terms and conditions of the Uptobox service while using this library.
 
-[GNU General Public License, Version 3.0](LICENSE)
+### License
+
+This project is licensed under the [GPL v3 License](https://github.com/hyugogirubato/pyuptobox/blob/main/LICENSE).
